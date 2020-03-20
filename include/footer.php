@@ -7,7 +7,7 @@ if(!defined("FOOTER")){
 ?>
 
 <!-- Footer -->
-<footer class="page-footer font-small bg-dark fixed-bottom">
+<footer class="page-footer font-small fixed-bottom" style="background-color:black;">
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3 text-white">© <?php echo date('Y'); ?> Copyright:

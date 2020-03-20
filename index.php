@@ -16,7 +16,5 @@
 
 	<!-- javascript libraries -->
 	<?php require 'Links/JsLinks.php'; ?>
-	<!-- javascript main file -->
-	<script type="text/javascript" src="JS/main.js"></script>
 </body>
 </html>
