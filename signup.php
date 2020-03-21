@@ -3,10 +3,11 @@ define("HEADER", TRUE);
 define("FOOTER", TRUE);
 
 require 'database/database_connection.php';
-
+require 'script.php';
+$msg = "";
 if(isset($_POST['submit']))
 {
-	SignUp($con,$_POST['name'],$_POST['email'],$_POST['password']);
+	$msg = SignUp($con,$_POST['name'],$_POST['email'],$_POST['password']);
 }
 
 ?>
@@ -31,8 +32,9 @@ if(isset($_POST['submit']))
 				<div class="col-md-6 mx-auto">
 					<div class="myform form ">
 						<form action="" method="post" name="login">
+							<?php echo $msg; ?>
 							<div class="form-group">
-								<input type="text" name="name"  class="form-control my-input" id="name" placeholder="Name" required>
+								<input type="text" name="name"  class="form-control my-input" id="name" placeholder="Name" pattern='^[A-Za-z]+' title="Only Characters are allowed" required>
 							</div>
 							<div class="form-group">
 								<input type="email" name="email"  class="form-control my-input" id="email" placeholder="Email" required>
