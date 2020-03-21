@@ -157,9 +157,10 @@ margin-top: 0px !important;
 margin-bottom: 0px !important;
 }
 
-/*signup page responsive media queries*/
+/*responsive media queries*/
 @media (max-width:768px)
 {
+	/*signup page responsive media queries*/
 	#signup-img
 	{
 		width:300px;
@@ -178,4 +179,40 @@ margin-bottom: 0px !important;
 		position:relative;
 		bottom:153px;
 	}
+	/*end signup page responsive media queries*/
+
+	/*intro section responsive media queries*/
+	.intro-img
+	{
+		width:300px;
+		height:auto;
+		position:relative;
+		top:40px;
+		left:40px;
+	}
+	#intro-content
+	{
+		position:relative;
+		bottom:320px;
+	}
+	#intro-content h3
+	{
+		font-size:20px;
+	}
+	#intro-content button,
+	#intro-content a
+	{
+		font-size:12px;
+	}
+	#intro-content a
+	{
+		position:relative;
+		top:50px;
+		right:138px;
+	}
+	.intro-sec
+	{
+		width:100%;
+	}
+
 }

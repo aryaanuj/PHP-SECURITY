@@ -12,9 +12,11 @@ if(!defined("BODY")){
 <section class="intro" id="intro-sec">
 	<h2 class="text-white py-5 pl-5">PHP <span class="text-white">SECURITY</span></h2>
 	<img src="WebImage/1.png" class="float-right intro-img">
-	<h3 class="text-white py-5 pl-5"><span class="text-danger">MAKE OUR WEBSITE </span> FULLY SECURED</h3>
-	<button class="btn ml-5 intro-get-started">LET'S GET STARTED</button>
-	<a href="signup.php" class="btn intro-register text-white">REGISTER NOW</a>
+	<div id="intro-content">
+		<h3 class="text-white py-5 pl-5"><span class="text-danger">MAKE OUR WEBSITE </span> FULLY SECURED</h3>
+		<button class="btn ml-5 intro-get-started">LET'S GET STARTED</button>
+		<a href="signup.php" class="btn intro-register text-white">REGISTER NOW</a>
+	</div>
 	<div id="icons-con" class="float-right"> 
 		<div class="bg-danger dicons-container"><center><a href="#facebook" class="text-white"><i class="fa fa-facebook py-3 dicons" ></i></a></center></div>
 		<div class="bg-danger dicons-container"><center><a href="#twitter" class="text-white"><i class="fa fa-twitter py-3 dicons" ></i></a></center></div>
