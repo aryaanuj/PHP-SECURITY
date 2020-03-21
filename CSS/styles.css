@@ -156,3 +156,26 @@ height: 1px;
 margin-top: 0px !important;
 margin-bottom: 0px !important;
 }
+
+/*signup page responsive media queries*/
+@media (max-width:768px)
+{
+	#signup-img
+	{
+		width:300px;
+		height:auto;
+		padding-top:15px;
+		padding-left:50px;
+	}
+	.section-header
+	{
+		position:relative;
+		right:70px;
+		bottom:20px;
+	}
+	#signup-form
+	{
+		position:relative;
+		bottom:153px;
+	}
+}

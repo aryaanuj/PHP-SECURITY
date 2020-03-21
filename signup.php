@@ -29,9 +29,9 @@ if(isset($_POST['submit']))
 				<div class="col-md-6">
 					<img src="WebImage/1.png" class="img-fluid" id="signup-img">
 				</div>
-				<div class="col-md-6 mx-auto">
+				<div class="col-md-6 mx-auto" id="signup-form">
 					<div class="myform form ">
-						<form action="" method="post" name="login">
+						<form action="" method="post">
 							<?php echo $msg; ?>
 							<div class="form-group">
 								<input type="text" name="name"  class="form-control my-input" id="name" placeholder="Name" pattern='^[A-Za-z]+' title="Only Characters are allowed" required>
