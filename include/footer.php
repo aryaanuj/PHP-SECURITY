@@ -1,7 +1,7 @@
 <?php
-
 if(!defined("FOOTER")){
-	exit(header("Location:Error_404.php"));
+	require 'Error_404.php';
+	exit(Errors_404());
 }
 
 ?>

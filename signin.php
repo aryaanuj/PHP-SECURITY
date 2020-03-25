@@ -1,7 +1,9 @@
 <?php
 session_start();
 require 'database/database_connection.php';
-require 'script.php'; // FOR SignIn() function
+require 'script.php';
+//if user logged in then it is not allowed to signin.
+if(isLoggedIn()){exit(header("Location:index.php"));}
 $msg = "";
 if(isset($_POST['signin'])){
 	$msg = SignIn($con, $_POST['email'], $_POST['password']);

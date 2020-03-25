@@ -1,6 +1,7 @@
 <?php 
 	session_start();
 	require 'script.php';
+	
 	define("HEADER", TRUE); 
 	define("BODY", TRUE);
 	define("FOOTER", TRUE);

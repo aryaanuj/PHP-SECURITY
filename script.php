@@ -119,5 +119,4 @@ function isEmailExist($con, $email)
 }
 
 
-
 ?>
