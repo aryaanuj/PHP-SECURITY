@@ -1,3 +1,10 @@
+<?php 
+	session_start();
+	require 'script.php';
+	define("HEADER", TRUE); 
+	define("BODY", TRUE);
+	define("FOOTER", TRUE);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,11 +12,7 @@
 	<?php require 'Links/CSSLinks.php'; ?>
 </head>
 <body>
-	<?php 
-		define("HEADER", TRUE); 
-		define("BODY", TRUE);
-		define("FOOTER", TRUE);
-	?>
+	
 	<?php require 'include/header.php'; ?>
 	<?php require 'include/body.php'; ?>
 	<?php require 'include/footer.php'; ?>

@@ -1,10 +1,10 @@
 <?php
 
 if(!defined("HEADER")){
-	exit();
+	exit(header("Location:Error_404.php"));
 }
-
 ?>
+
 <!-- code start from here -->
 
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:black;">
@@ -19,14 +19,14 @@ if(!defined("HEADER")){
     	</form> -->
     	<ul class="navbar-nav ml-auto ">
       		<li class="nav-item active">
-        		<a class="nav-link" href="#intro-sec">Home <span class="sr-only">(current)</span></a>
+        		<a class="nav-link" href="#intro-sec">HOME <span class="sr-only">(current)</span></a>
       		</li>
       		<li class="nav-item">
         		<a class="nav-link" href="#about-sec">ABOUT US</a>
       		</li>
       		<li class="nav-item dropdown">
         		<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          		Admin
+          		ADMIN
         		</a>
         		<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
           			<a class="dropdown-item" href="#">Action</a>
@@ -35,6 +35,20 @@ if(!defined("HEADER")){
           			<a class="dropdown-item" href="#">Something else here</a>
         		</div>
       		</li>
+          <?php if(isLoggedIn()){?>
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="WebImage/default_profile.jpg" class="rounded-circle" width="25" height="25">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item text-danger" href="#"><?php echo $_SESSION['user_id']; ?></a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#"><i class='fa fa-user'></i>  My Account</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="./logout.php?status='logout'"><i class="fa fa-sign-out"></i> Logout</a>
+            </div>
+          </li>
+          <?php } ?>
     	</ul>
   	</div>
 </nav>

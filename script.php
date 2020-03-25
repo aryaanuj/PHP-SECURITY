@@ -1,14 +1,13 @@
 <?php
 require 'database/database_connection.php';
 
+
+//############################ FOR USER SIGN UP ###############################
 function SignUp($con, $name, $email, $password)
 {
 	if(isEmailExist($con, $email))
 	{
-		return "<div class='alert alert-danger alert-dismissable'>
-					<a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-					Email Address already Exist.</div>";
-
+		return showErrorMsg("Email Address already Exist.");
 	}
 	else
 	{
@@ -23,39 +22,84 @@ function SignUp($con, $name, $email, $password)
 			$PASSWORDS = password_hash(mysqli_real_escape_string($con, $password),PASSWORD_BCRYPT,["cost"=>8]);
 			if(mysqli_stmt_execute($RES))
 			{
-				return "<div class='alert alert-success alert-dismissable'>
-						<a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-						SignUp Successfully!!</div>";
+				return showSuccessMsg("SignUp Successfully!!");
 			}
 			else
 			{
-				return "<div class='alert alert-danger alert-dismissable'>
-						<a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-						OOPS! Something went wrong.</div>";
+				return showErrorMsg("OOPS! Something went wrong.");
 			}
 		}
 		mysqli_stmt_close($RES);
 	}
 }
 
+//############################ FOR USER SIGN IN #############################
 
-function dummy($con)
+function SignIn($con, $email, $password)
 {
-	$res  = mysqli_query($con, "select * from users where email='anb@gmail.com'");
-	while($row = mysqli_fetch_array($res))
-	{	
-		if(password_verify('abcd',$row['password']))
+	$QUERY  = "SELECT * FROM users WHERE email=?";
+	$RESULT = mysqli_prepare($con,$QUERY);
+	mysqli_stmt_bind_param($RESULT,'s',$EMAIL);
+	$EMAIL = mysqli_real_escape_string($con,htmlspecialchars(trim($email)));
+	if(mysqli_stmt_execute($RESULT))
+	{
+		mysqli_stmt_store_result($RESULT);
+		if(mysqli_stmt_num_rows($RESULT)==1)
 		{
-			echo "done";
+			mysqli_stmt_bind_result($RESULT,$ID,$USERNAME,$EMAILS,$PASSWORD);
+			while(mysqli_stmt_fetch($RESULT))
+			{
+				if(password_verify($password, $PASSWORD))
+				{
+					$_SESSION['logged_in'] = true;
+					$_SESSION['user_id'] = $EMAILS;
+					// session_regenerate_id();
+					header("Location:index.php");
+				}
+				else
+				{
+					return showErrorMsg("Invalid Username and Password.");
+				}
+			}
 		}
 		else
 		{
-			echo "not done";
+			return showErrorMsg("Invalid Username and Password.");
 		}
+	}
+	mysqli_stmt_close($RESULT);
+}
+
+//########################## FOR CHECK USER LOGGED IN OR NOT ##################
+function isLoggedIn()
+{
+	if(isset($_SESSION['logged_in']) && isset($_SESSION['user_id'])){
+		return true;
+	}
+	else{
+		return false;
 	}
 }
 
+//###################### FOR SHOWING ERROR ALERT MESSAGE ######################
+function showErrorMsg($msg) 
+{
+	return "<div class='alert alert-danger alert-dismissable'>
+			<a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+			".$msg."
+			</div>";
+}
 
+//#################### FOR SHOWING SUCCESS ALERT MESSAGE ######################
+function showSuccessMsg($msg)
+{
+	return "<div class='alert alert-success alert-dismissable'>
+			<a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+			".$msg."
+			</div>";
+}
+
+//################### FOR CHECKING IF EMAIL EXIST OR NOT #################
 function isEmailExist($con, $email)
 {
 	$QUERY = "SELECT * FROM users WHERE email=?";

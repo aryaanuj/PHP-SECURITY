@@ -1,7 +1,7 @@
 <?php
 
 if(!defined("BODY")){
-	exit();
+	exit(header("Location:Error_404.php"));
 }
 
 ?>
@@ -14,8 +14,10 @@ if(!defined("BODY")){
 	<img src="WebImage/1.png" class="float-right intro-img">
 	<div id="intro-content">
 		<h3 class="text-white py-5 pl-5"><span class="text-danger">MAKE OUR WEBSITE </span> FULLY SECURED</h3>
-		<button class="btn ml-5 intro-get-started">LET'S GET STARTED</button>
+		<a href="signin.php" class="btn ml-5 intro-get-started">LET'S GET STARTED</a>
+		<?php if(!isLoggedIn()){?>
 		<a href="signup.php" class="btn intro-register text-white">REGISTER NOW</a>
+		<?php } ?>
 	</div>
 	<div id="icons-con" class="float-right"> 
 		<div class="bg-danger dicons-container"><center><a href="#facebook" class="text-white"><i class="fa fa-facebook py-3 dicons" ></i></a></center></div>

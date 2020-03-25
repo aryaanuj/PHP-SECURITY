@@ -9,7 +9,6 @@ if(isset($_POST['submit']))
 {
 	$msg = SignUp($con,$_POST['name'],$_POST['email'],$_POST['password']);
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,7 +33,7 @@ if(isset($_POST['submit']))
 						<form action="" method="post">
 							<?php echo $msg; ?>
 							<div class="form-group">
-								<input type="text" name="name"  class="form-control my-input" id="name" placeholder="Name" pattern='^[A-Za-z]+' title="Only Characters are allowed" required>
+								<input type="text" name="name"  class="form-control my-input" id="name" placeholder="Name" pattern='^[A-Za-z ]+' title="Only Characters are allowed" required>
 							</div>
 							<div class="form-group">
 								<input type="email" name="email"  class="form-control my-input" id="email" placeholder="Email" required>
