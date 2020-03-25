@@ -53,7 +53,7 @@ function SignIn($con, $email, $password)
 				{
 					$_SESSION['logged_in'] = true;
 					$_SESSION['user_id'] = $EMAILS;
-					// session_regenerate_id();
+					session_regenerate_id(true);
 					header("Location:index.php");
 				}
 				else
@@ -74,6 +74,7 @@ function SignIn($con, $email, $password)
 function isLoggedIn()
 {
 	if(isset($_SESSION['logged_in']) && isset($_SESSION['user_id'])){
+		session_regenerate_id(true);
 		return true;
 	}
 	else{

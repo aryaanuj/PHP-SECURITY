@@ -6,6 +6,6 @@ generate token to prevent from cross site request forgery.
 hide errors (error_reporting(0)).
 hide directory indexes (use .htaccess file "Options -Indexes").
 id's shouldn't be write directly.
-session hijacking ---> (session_regenerate_id())
+session hijacking ---> (session_regenerate_id(true))
 https://www.cloudways.com/blog/php-security/ 
-javascript code encrypt
+after completion of project whole code will be compress or encrypt
