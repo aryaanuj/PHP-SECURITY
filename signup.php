@@ -1,24 +1,20 @@
 <?php 
-define("HEADER", TRUE);
-define("FOOTER", TRUE);
+	//ALL SCRIPTS
+	require 'script.php';
+	$msg = "";
 
-require 'database/database_connection.php';
-require 'script.php';
-$msg = "";
-if(isset($_POST['submit']))
-{
-	$msg = SignUp($con,$_POST['name'],$_POST['email'],$_POST['password']);
-}
+	//FOR SIGN UP
+	$msg = SignUp();
+
+	//HEAD CONTAINER (CSS LINKS)
+	require 'include/head_container.php';
+
+	//PAGE TITLE
+	echo "<title>PHP-SECURITY</title>";
+
+	//HEADER 
+	require 'include/header.php'; 
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>PHP-SECURITY | SIGN UP</title>
-	<?php require 'Links/CSSLinks.php'; ?>
-</head>
-<body>
-	<?php require 'include/header.php'; ?>
-	
 	<!-- sign up section -->
 
 	<section id="signup-sec">
@@ -46,7 +42,7 @@ if(isset($_POST['submit']))
 								<div id="cnf-msg" class="pt-2"></div>
 							</div>
 							<div class="text-center ">
-								<button type="submit" class=" btn btn-block send-button tx-tfm" name="submit">Create Your Free Account</button>
+								<button type="submit" class=" btn btn-block send-button tx-tfm" name="signup">Create Your Free Account</button>
 							</div>
 							<div class="col-md-12 ">
 								<div class="login-or">
@@ -69,11 +65,7 @@ if(isset($_POST['submit']))
 		</div>
 	</section>
 
-	<!-- footer section -->
-	<?php require 'include/footer.php'; ?>
-
-	<!-- javascript libraries -->
-	<?php require 'Links/JsLinks.php'; ?>
-
-</body>
-</html>
+<?php
+	//FOOTER CONTAINER (JS LINKS)
+	require 'include/footer_container.php';
+?>

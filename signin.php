@@ -1,25 +1,24 @@
 <?php
 session_start();
-require 'database/database_connection.php';
 require 'script.php';
-//if user logged in then it is not allowed to signin.
+
+//IF USER LOGGED IN THEN HE WILL NOT ACCESS SIGN IN PAGE
 if(isLoggedIn()){exit(header("Location:index.php"));}
 $msg = "";
-if(isset($_POST['signin'])){
-	$msg = SignIn($con, $_POST['email'], $_POST['password']);
-}
-?>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>PHP-SECURITY | SIGN IN</title>
-	<?php require 'Links/CSSLinks.php'; ?>
-</head>
-<body>
-	<?php define("HEADER", TRUE); ?>
-	<?php define("FOOTER", TRUE); ?>
-	<?php require 'include/header.php'; ?>
 
+//FOR USER SIGN IN
+$msg = SignIn();
+
+//HEAD CONTAINER (CSS LINKS)
+require 'include/head_container.php';
+
+//PAGE TITLE
+echo "<title>PHP-SECURITY | SIGN IN</title>";
+
+//HEADER 
+require 'include/header.php'; 
+
+?>
 	<!-- sign in section  -->
 	<section id="signup-sec">
 		<div class="container">
@@ -60,10 +59,8 @@ if(isset($_POST['signin'])){
 		</div>
 	</section>
 	<!-- signin section end -->
-
-	<?php require 'include/footer.php'; ?>
-	<!-- javascript libraries -->
-	<?php require 'Links/JsLinks.php'; ?>
-</body>
-</html>
+<?php
+//FOOTER CONTAINER (JS LINKS)
+require 'include/footer_container.php';
+?>
 

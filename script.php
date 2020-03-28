@@ -1,73 +1,87 @@
 <?php
 require 'database/database_connection.php';
 
-
 //############################ FOR USER SIGN UP ###############################
-function SignUp($con, $name, $email, $password)
+function SignUp()
 {
-	if(isEmailExist($con, $email))
-	{
-		return showErrorMsg("Email Address already Exist.");
-	}
-	else
-	{
-		$SQL = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
-		$RES = mysqli_prepare($con, $SQL);
+	global $con;
+	if(isset($_POST['signup']))
+	{	
+		$email = $_POST['email'];
+		$name = $_POST['name'];
+		$password = $_POST['password'];
 
-		if($RES)
+		//check email already exist or not
+		if(isEmailExist($email))
 		{
-			mysqli_stmt_bind_param($RES,"sss",$NAMES,$EMAILS,$PASSWORDS);
-			$NAMES = mysqli_real_escape_string($con, $name);
-			$EMAILS = mysqli_real_escape_string($con, $email);
-			$PASSWORDS = password_hash(mysqli_real_escape_string($con, $password),PASSWORD_BCRYPT,["cost"=>8]);
-			if(mysqli_stmt_execute($RES))
-			{
-				return showSuccessMsg("SignUp Successfully!!");
-			}
-			else
-			{
-				return showErrorMsg("OOPS! Something went wrong.");
-			}
+			return showErrorMsg("Email Address already Exist.");
 		}
-		mysqli_stmt_close($RES);
+		else
+		{
+			$SQL = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+			$RES = mysqli_prepare($con, $SQL);
+
+			if($RES)
+			{
+				mysqli_stmt_bind_param($RES,"sss",$NAMES,$EMAILS,$PASSWORDS);
+				$NAMES = mysqli_real_escape_string($con, $name);
+				$EMAILS = mysqli_real_escape_string($con, $email);
+				$PASSWORDS = password_hash(mysqli_real_escape_string($con, $password),PASSWORD_BCRYPT,["cost"=>8]);
+				if(mysqli_stmt_execute($RES))
+				{
+					return showSuccessMsg("SignUp Successfully!!");
+				}
+				else
+				{
+					return showErrorMsg("OOPS! Something went wrong.");
+				}
+			}
+			mysqli_stmt_close($RES);
+		}
 	}
 }
 
 //############################ FOR USER SIGN IN #############################
 
-function SignIn($con, $email, $password)
+function SignIn()
 {
-	$QUERY  = "SELECT * FROM users WHERE email=?";
-	$RESULT = mysqli_prepare($con,$QUERY);
-	mysqli_stmt_bind_param($RESULT,'s',$EMAIL);
-	$EMAIL = mysqli_real_escape_string($con,htmlspecialchars(trim($email)));
-	if(mysqli_stmt_execute($RESULT))
+	global $con;
+	if(isset($_POST['signin']))
 	{
-		mysqli_stmt_store_result($RESULT);
-		if(mysqli_stmt_num_rows($RESULT)==1)
+		$email = $_POST['email'];
+		$password = $_POST['password'];
+		$QUERY  = "SELECT * FROM users WHERE email=?";
+		$RESULT = mysqli_prepare($con,$QUERY);
+		mysqli_stmt_bind_param($RESULT,'s',$EMAIL);
+		$EMAIL = mysqli_real_escape_string($con,htmlspecialchars(trim($email)));
+		if(mysqli_stmt_execute($RESULT))
 		{
-			mysqli_stmt_bind_result($RESULT,$ID,$USERNAME,$EMAILS,$PASSWORD);
-			while(mysqli_stmt_fetch($RESULT))
+			mysqli_stmt_store_result($RESULT);
+			if(mysqli_stmt_num_rows($RESULT)==1)
 			{
-				if(password_verify($password, $PASSWORD))
+				mysqli_stmt_bind_result($RESULT,$ID,$USERNAME,$EMAILS,$PASSWORD);
+				while(mysqli_stmt_fetch($RESULT))
 				{
-					$_SESSION['logged_in'] = true;
-					$_SESSION['user_id'] = $EMAILS;
-					session_regenerate_id(true);
-					header("Location:index.php");
-				}
-				else
-				{
-					return showErrorMsg("Invalid Username and Password.");
+					if(password_verify($password, $PASSWORD))
+					{
+						$_SESSION['logged_in'] = true;
+						$_SESSION['user_id'] = $EMAILS;
+						session_regenerate_id(true);
+						header("Location:index.php");
+					}
+					else
+					{
+						return showErrorMsg("Invalid Username and Password.");
+					}
 				}
 			}
+			else
+			{
+				return showErrorMsg("Invalid Username and Password.");
+			}
 		}
-		else
-		{
-			return showErrorMsg("Invalid Username and Password.");
-		}
+		mysqli_stmt_close($RESULT);
 	}
-	mysqli_stmt_close($RESULT);
 }
 
 //########################## FOR CHECK USER LOGGED IN OR NOT ##################
@@ -77,9 +91,7 @@ function isLoggedIn()
 		session_regenerate_id(true);
 		return true;
 	}
-	else{
-		return false;
-	}
+	else{return false;}
 }
 
 //###################### FOR SHOWING ERROR ALERT MESSAGE ######################
@@ -101,21 +113,18 @@ function showSuccessMsg($msg)
 }
 
 //################### FOR CHECKING IF EMAIL EXIST OR NOT #################
-function isEmailExist($con, $email)
+function isEmailExist($email)
 {
+	global $con;
 	$QUERY = "SELECT * FROM users WHERE email=?";
 	$RESULT = mysqli_prepare($con,$QUERY);
 	mysqli_stmt_bind_param($RESULT,"s", $email);
 	mysqli_stmt_execute($RESULT);
 	mysqli_stmt_store_result($RESULT);
 	if(mysqli_stmt_num_rows($RESULT)>0)
-	{
-		return true;
-	}
+	{return true;}
 	else
-	{
-		return false;
-	}
+	{return false;}
 	mysqli_stmt_close($RESULT);
 }
 
