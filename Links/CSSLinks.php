@@ -16,4 +16,4 @@
 <link rel="stylesheet" type="text/css" href="./lib/animate/animate.min.css">
 
 <!-- main style -->
-<link rel="stylesheet" type="text/css" href="./CSS/styles.css">
+<link rel="stylesheet" type="text/css" href="./CSS/style.css">

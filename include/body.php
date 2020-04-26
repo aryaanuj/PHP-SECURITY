@@ -18,7 +18,7 @@ if(!defined("BODY")){
 		<a href="signin.php" class="btn ml-5 intro-get-started">LET'S GET STARTED</a>
 		<a href="signup.php" class="btn intro-register text-white">REGISTER NOW</a>
 		<?php }else{?>
-		<a href="#" class="btn ml-5 intro-get-started">PHP-INFO</a>
+		<a href="php-info.php" class="btn ml-5 intro-get-started">PHP-INFO</a>
 		<a href="#" class="btn intro-get-started">PHP-SECURITY FEATURES</a>
 		<?php } ?>
 	</div>

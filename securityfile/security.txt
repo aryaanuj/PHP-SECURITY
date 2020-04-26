@@ -1,5 +1,6 @@
 include files using 'define()' method.
 password hashing.
+input filed autocomplete disable
 use prepared statements preventing from sql injection.
 use htmlspecialchars function to prevent from cross side scripting.
 generate token to prevent from cross site request forgery.

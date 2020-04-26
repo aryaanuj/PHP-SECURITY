@@ -75,6 +75,7 @@ body,h1,p,a
   width:100%;
   height:100vh;
   padding-top:20px;
+  background:white !important;
 }
  
 /*section header*/
@@ -84,8 +85,10 @@ body,h1,p,a
 	height:55px;
 	font-size:30px;
 	font-weight:bold;
-	text-align:center;
-	margin-left:40%;
+	text-align:center !important;
+	align-items: center;
+	position: relative;
+	left:42%;
 	margin-top:50px;
 	border-bottom:5px solid #e74c3c;
 	border-bottom-left-radius:50%;
@@ -101,6 +104,8 @@ body,h1,p,a
 #signup-img
 {
 	position:relative; bottom:120px;
+	width:470px!important; 
+	height: 500px!important;
 }
 .send-button{
 	background: #54C7C3;
@@ -157,8 +162,20 @@ margin-top: 0px !important;
 margin-bottom: 0px !important;
 }
 
+/*php-info page section*/
+.php-info
+{
+	 width:100%;
+	 overflow-x:hidden;
+}
+.services
+{
+	width:100%;
+	overflow-x:hidden;
+}
+
 /*signup page responsive media queries*/
-@media (min-width:768px)
+@media (max-width:648px)
 {
 	#signup-img
 	{
@@ -169,5 +186,26 @@ margin-bottom: 0px !important;
 	{
 		position:relative;
 		right:300px;
+	}
+	.ncontent
+	{
+		background:white;
+	}
+	.nlink
+	{
+		color:black!important;
+	}
+	.nul
+	{
+		padding-left:10px;
+	}
+
+	.php-info-content
+	{
+		padding:20px;
+	}
+	.p-content
+	{
+		margin-right:20px;
 	}
 }

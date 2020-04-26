@@ -1,12 +1,18 @@
 <?php
 require 'database/database_connection.php';
 
-//############################ FOR USER SIGN UP ###############################
+//################### FOR USER SIGN UP #########################
 function SignUp()
 {
 	global $con;
 	if(isset($_POST['signup']))
 	{	
+		$token = @$_POST['token'];
+		if(check_csrf_token($token)!="true")
+		{
+			return showErrorMsg(check_csrf_token($token));
+			exit();
+		}
 		$email = $_POST['email'];
 		$name = $_POST['name'];
 		$password = $_POST['password'];
@@ -48,6 +54,12 @@ function SignIn()
 	global $con;
 	if(isset($_POST['signin']))
 	{
+		$token = @$_POST['token'];
+		if(check_csrf_token($token)!="true")
+		{
+			return showErrorMsg(check_csrf_token($token));
+			exit();
+		}
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 		$QUERY  = "SELECT * FROM users WHERE email=?";
@@ -88,7 +100,7 @@ function SignIn()
 function isLoggedIn()
 {
 	if(isset($_SESSION['logged_in']) && isset($_SESSION['user_id'])){
-		session_regenerate_id(true);
+		@session_regenerate_id(true);
 		return true;
 	}
 	else{return false;}
@@ -128,5 +140,36 @@ function isEmailExist($email)
 	mysqli_stmt_close($RESULT);
 }
 
+//################### GENERATE CSRF TOKEN ##########################
 
+function csrf_token(){
+	$token = bin2hex( random_bytes(32) );
+	$_SESSION['csrf-token'] = $token;
+	return $token;
+}
+
+// CHECK CSRF TOKEN
+function check_csrf_token($token)
+{
+	if(empty($token))
+	{
+		return "Token Missing!!";
+	}
+	else if($token != $_SESSION['csrf-token'])
+	{
+		return "Token Not Matched!!";
+	}
+	else
+	{
+		return true;
+	}
+}
+
+//######################### GET USER NAME ###################
+function getUsername($email)
+{
+	global $con;
+	$res = mysqli_query($con, "SELECT username FROM users WHERE email='$email'");
+	return ucwords(mysqli_fetch_array($res)['username']);
+}
 ?>

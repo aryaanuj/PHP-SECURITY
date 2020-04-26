@@ -7,7 +7,24 @@ if(!defined("HEADER")){
 
 <!-- code start from here -->
 
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:black;">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background:#0275d8;width:100%;height:30px;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navContent">
+      <ul class="navbar-nav ml-auto ">
+          <li class="nav-item active">
+            <a class="nav-link text-white">Email- info@phpsecurity.com <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" >Contact- 9878679878</a>
+          </li>
+      </ul>
+    </div>
+</nav>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:black; height:60px">
   	<a class="navbar-brand" href="index.php">PHP SECURITY</a>
   	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     	<span class="navbar-toggler-icon"></span>
@@ -41,7 +58,7 @@ if(!defined("HEADER")){
               <img src="WebImage/default_profile.jpg" class="rounded-circle" width="25" height="25">
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item text-danger" href="#"><?php echo $_SESSION['user_id']; ?></a>
+                <a class="dropdown-item text-center font-weight-bold" href="#"><?= getUsername($_SESSION['user_id']); ?></a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#"><i class='fa fa-user'></i>  My Account</a>
                 <div class="dropdown-divider"></div>

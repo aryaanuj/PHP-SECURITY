@@ -22,7 +22,7 @@ require 'include/header.php';
 	<!-- sign in section  -->
 	<section id="signup-sec">
 		<div class="container">
-			<div class="section-header">SIGN UP</div><br><br>
+			<div class="section-header">SIGN IN</div><br><br>
 			<div class="row">
 				<div class="col-md-6">
 					<img src="WebImage/1.png" class="img-fluid" id="signup-img">
@@ -31,11 +31,13 @@ require 'include/header.php';
 					<div class="myform form ">
 						<form action="" method="post">
 							<?php echo $msg; ?>
+							<!-- CSRF TOKEN -->
+							<input type="hidden" name="token" value="<?= csrf_token(); ?>">
 							<div class="form-group">
-								<input type="email" name="email"  class="form-control my-input" id="email" placeholder="Email" required>
+								<input type="email" name="email"  class="form-control my-input" id="email" placeholder="Email" autocomplete="off" required>
 							</div>
 							<div class="form-group">
-								<input type="password" name="password" id="password"  class="form-control my-input" placeholder="Password" required>
+								<input type="password" name="password" id="password"  class="form-control my-input" autocomplete="off" placeholder="Password" required>
 							</div>
 							<div class="text-center ">
 								<button type="submit" class=" btn btn-block btn-outline-primary tx-tfm" name="signin">Sign In Here</button>
